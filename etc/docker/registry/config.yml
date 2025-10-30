@@ -1,0 +1,34 @@
+version: 0.1
+log:
+  level: debug
+  formatter: json
+  fields:
+    service: registry
+storage:
+  cache:
+    blobdescriptor: inmemory
+  delete:
+    enabled: true
+  filesystem:
+    rootdirectory: /var/lib/registry
+  maintenance:
+    uploadpurging:
+      enabled: true
+      age: 168h
+      dryrun: false
+      interval: 1m
+    readonly:
+      enabled: false
+http:
+  addr: 0.0.0.0:5000
+  headers:
+    X-Content-Type-Options: nosniff
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
+proxy:
+  remoteurl: https://registry-1.docker.io
+  username:
+  password:
